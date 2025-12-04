@@ -1,0 +1,14 @@
+- name: play2
+  hosts: allservers
+  tasks:
+    - name: create diskfree report and save in file
+      ansible.builtin.shell: "df -h > /tmp/diskfree.txt"
+    - name: get the content of the diskfree report
+      ansible.builtin.command: "cat /tmp/diskfree.txt"
+      register: commandoutput
+    - name: print the poutput of the previus tasks
+      ansible.builtin.debug:
+       # var: commandoutput
+        msg:
+          - "the command took{{commandoutput.delta}}"
+          - "{{commandoutput.stdout_lines}}"

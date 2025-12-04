@@ -1,0 +1,9 @@
+- name: start service and enable
+  tags:
+    - configure
+    - service
+  ansible.builtin.service:
+    name: "{{appservice}}"
+    state: started
+    enabled: true
+

@@ -1,0 +1,17 @@
+- name: create multiple users
+  hosts:  allservers
+  vars_files: userlist_Password.txt
+  tasks:
+    - name: create users
+      #no_log: true
+      user:
+        name: "{{item.uname}}"
+        state: present
+        comment: "{{item.uname}}"
+        password: "{{ item.upass | password_hash('sha512') }}"
+      #with_items:
+      loop: "{{vusers}}"
+      #loop: 
+        # - sales11
+        # - sales12
+        # - salesmanager11

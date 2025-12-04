@@ -1,0 +1,29 @@
+- name: install and configure apache web server
+  hosts: web
+  tasks:
+    - name: install dovecot app in systems with more than 4GB
+      package:
+        name: dovecot
+        state: latest
+      when: ansible_memtotal_mb >= 4096
+    - name: install apache in redhat family OS
+      dnf:
+        name: httpd
+        state: latest
+      when: ansible_os_family == "Redhat"
+    
+    # - name: start service and enable
+    #   tags:
+    #     - configure
+    #     - web
+    #   ansible.builtin.service:
+    #     name: httpd
+    #     state: started
+    #     enabled: true
+    # - name: open firewall port 80
+    #   ansible.posix.firewalld:
+    #     service: http
+    #     #port: 80/tcp
+    #     state: enabled
+    #     immediate: yes
+    #     permanent: 1

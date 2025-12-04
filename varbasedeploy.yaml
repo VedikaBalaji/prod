@@ -1,0 +1,23 @@
+- name: "deploy {{app}}"
+  hosts: "{{group}}"
+  # vars:
+  #   app: httpd
+  #   appservice: httpd
+  #   appport: 80/tcp
+  vars_files: app-deploy.properties
+  tasks:
+    - name: "Install {{app}} in managed nodes"
+      dnf:
+        name: "{{app}}"
+        state: latest
+    - name: "start {{appservice}} service"
+      service:
+        name: "{{appservice}}"
+        state: started
+        enabled: true
+    - name: "open firewall {{appport}} port"
+      firewalld:
+        port: "{{appport}}"
+        state: enabled
+        immediate: yes
+        permanent: 1

@@ -1,0 +1,32 @@
+- name: install and configure maria db server
+  hosts: db
+  tasks:
+    - name: install mariadb app
+      tags:
+        - install
+        - db
+      dnf:
+        name: mariadb-server
+        state: latest
+    # - name: create /copy home page
+    #   #ignore_errors:false
+    #   copy:
+    #     #src: homepage.html # create homepage in master
+    #     content: "This web page created using ansible playboook task"
+    #     dest: /var/www/html/index.html
+    - name: start service and enable 
+      tags:
+        - install
+        - db
+      service:
+        name: mariadb
+        state: started
+        enabled: true
+    - name: open firewall port 3306
+      firewalld:
+        #service: mysql
+        port: 3306/tcp
+        state: enabled
+        immediate: yes
+        permanent: 1
+

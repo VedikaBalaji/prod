@@ -1,0 +1,20 @@
+- name: create multiple users
+  hosts:  allservers
+  vars_files: userlist.txt
+  # vars:
+    # vusers:
+    #   - sales21
+    #   - sales22
+    #   - salesmanager21
+  tasks:
+    - name: create users
+      user:
+        name: "{{item}}"
+        state: present
+        comment: "{{item}}"
+      #with_items:
+      loop: "{{vusers}}"
+      #loop: 
+        # - sales11
+        # - sales12
+        # - salesmanager11
