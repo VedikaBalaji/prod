@@ -1,0 +1,14 @@
+{
+	"folders": [
+		{
+			"path": "../prod/k8s"
+		},
+		{
+			"path": "../prod/ansible"
+		}
+		{
+			"path": "../prod/docker"
+		}
+	],
+	"settings": {}
+}
