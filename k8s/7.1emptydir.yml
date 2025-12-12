@@ -1,0 +1,29 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: test-pd
+spec:
+  containers:
+  - image: nginxdemos/hello:plain-text
+    name: test-container
+    volumeMounts:
+    - mountPath: /cache
+      name: cache-volume
+  volumes:
+  - name: cache-volume
+    emptyDir:
+      sizeLimit: 500Mi
+
+
+# kubectl apply -f 7.1.emptyDir.yml
+# kubectl exec test-pd -it -- /bin/sh 
+# pwd
+# ls
+# ls cache/
+# echo test > /cache/textfile 
+# ls /cache
+# cat /cache/textfile 
+# exit
+
+# On the node pod running find uid of the pod - kubectl get pod test-pd -o json|grep uid
+# /var/lib/kubelet/pods/UID-Of-Pod/volumes/kubernetes.io~empty-dir/cache-volume

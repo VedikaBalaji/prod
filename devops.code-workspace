@@ -5,9 +5,15 @@
 		},
 		{
 			"path": "../prod/ansible"
-		}
+		},
 		{
 			"path": "../prod/docker"
+		},
+		{
+			"path": "../prod/helm"
+		},
+		{
+			"path": "../prod/dashboard"
 		}
 	],
 	"settings": {}

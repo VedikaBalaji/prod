@@ -22,7 +22,9 @@ systemctl disable --now firewalld || true
 swapoff -a
 sed -i '/swap/s/^/#/' /etc/fstab
 echo "✅ Firewall disabled and swap turned off"
-
+setenforce 0
+sed -i 's/^SELINUX=enforcing/SELINUX=disabled/' /etc/selinux/config
+echo "✅ SeLinux disabled"
 # ============================================================
 # Step 2: Enable required kernel modules and sysctl parameters
 # ============================================================

@@ -1,0 +1,32 @@
+#cat 7.11bb-sv.yml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: bbsvpod
+spec:
+  containers:
+  - image: busybox
+    name: busy
+    args: [/bin/sh, -c, 'while true; do echo $(date +"%Y-%m-%d %H:%M:%S") >> /busy/index.html; sleep 2; done']
+    volumeMounts:
+    - mountPath: /busy
+      name: test
+  - image: nginx
+    name: box
+    ports:
+    - containerPort: 80
+    volumeMounts:
+    - mountPath: /usr/share/nginx/html
+      name: test
+  volumes:
+  - name: test
+    emptyDir: {}
+
+#multicontainer shared volume mapping
+# kubectl apply -f 12.1bb-sv.yml
+# kubectl get pods
+# kubectl exec -it bbsvpod -c busy -- cat /busy/index.html
+# kubectl get pods all -o wide
+# curl http://podip
+# kubectl delete -f 7.11bb-sv.yml
+

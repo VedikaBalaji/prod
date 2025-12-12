@@ -1,0 +1,8 @@
+deploy: 
+  projname: prod-cdc
+  ns: prod
+  replicas: 1 #initial value 1 then updated to 4
+service:
+  sname: app-prod
+  ns: prod
+  port: 50101

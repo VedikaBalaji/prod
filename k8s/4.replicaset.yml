@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: nginx-rs
+  labels:
+    app: mywebapp
+    env: testing
+spec:
+  replicas: 2 #no pods required/desired
+  selector:
+    matchLabels:
+      proj: processing #match with template.metadata.label.key
+  template: #info about pod
+    metadata:
+      labels:
+        proj: processing
+    spec:
+      containers:
+        - name: myapp
+          image: nginx

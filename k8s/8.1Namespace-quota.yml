@@ -1,0 +1,22 @@
+#Namespace-quota.yml
+apiVersion: v1
+kind: Namespace
+metadata:
+  name:  labs
+---
+apiVersion: v1
+kind: ResourceQuota
+metadata:
+  name: lab-quota
+  namespace: labs
+spec:
+  hard:
+    pods: "2"
+    # requests.cpu: "2"
+    # requests.memory: 2Gi
+    # limits.cpu: "4"
+    # limits.memory: 4Gi
+
+# kubectl get pods -n labs
+# kubectl apply -f namespcae-quota.yml
+# kubectl get quota -n labs

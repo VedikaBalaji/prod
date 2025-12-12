@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx-pod
+  labels:
+    app.kubernetes.io/name: myapp
+    env: production
+spec:
+  containers:
+  - name: nginx-container
+    image: nginx:1-alpine
+    ports:
+      - containerPort: 80
+# kubectl apply -f 1.pod.yml
+# kubectl get pod nginx-pod
+# kubectl describe pod nginx-pod
+# kubectl exec nginx-pod -- cat /etc/os-release
+# kubectl exec -it nginx-pod -- /bin/sh
+# kubectl delete pod nginx-pod

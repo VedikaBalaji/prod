@@ -1,0 +1,5 @@
+# to get all the images in the cluster based on running pods
+kubectl get pods --all-namespaces -o jsonpath="{.items[*].spec.containers[*].image}" | tr -s '[[:space:]]' '\n' | sort | uniq
+
+pull k8web page
+docker pull paulbouwer/hello-kubernetes:1.10
